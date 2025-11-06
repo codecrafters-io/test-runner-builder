@@ -1,7 +1,7 @@
 FROM debian:bookworm-slim
 
 # Install deps
-RUN apt-get update && apt-get install -y curl wget jq tar
+RUN apt-get update && apt-get install -y curl wget jq tar git
 
 # Install depot
 RUN curl -fsSL https://depot.dev/install-cli.sh -o /tmp/install-cli.sh && \
