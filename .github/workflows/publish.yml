@@ -44,5 +44,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-        secrets: |
-          "test_runner_downloader_token=${{ secrets.CODECRAFTERS_BOT_GITHUB_TOKEN }}"
+          secrets: |
+            "test_runner_downloader_token=${{ secrets.CODECRAFTERS_BOT_GITHUB_TOKEN }}"
