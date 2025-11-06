@@ -3,7 +3,7 @@ next_patch_number := $(shell echo $$(($(current_patch_number)+1)))
 next_version_tag := v0.0.$(next_patch_number)
 
 build:
-	docker build -t test-runner-builder .
+	TEST_RUNNER_DOWNLOADER_TOKEN=$(shell gh auth token) docker build -t test-runner-builder --secret id=test_runner_downloader_token,env=TEST_RUNNER_DOWNLOADER_TOKEN .
 
 print_next_version_tag:
 	@echo $(next_version_tag) | tr -d '\n'

@@ -1,7 +1,7 @@
 FROM debian:bookworm-slim
 
 # Install deps
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl wget jq tar
 
 # Install depot
 RUN curl -fsSL https://depot.dev/install-cli.sh -o /tmp/install-cli.sh && \
@@ -13,3 +13,7 @@ ENV PATH="/root/.depot/bin:$PATH"
 
 # Ensure depot is installed and working
 RUN depot --version
+
+# Download test runner CLI
+COPY download_test_runner.sh /tmp/download_test_runner.sh
+RUN --mount=type=secret,id=test_runner_downloader_token,env=GITHUB_TOKEN /tmp/download_test_runner.sh
