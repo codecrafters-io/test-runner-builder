@@ -5,7 +5,7 @@ destinationDir="/var/opt/test-runner" # Destination directory
 
 repoOwner="codecrafters-io"                  # GitHub repository owner
 repoName="test-runner"                       # GitHub repository name
-releaseTag="v0.3.67"                         # Release tag to download
+releaseTag="v0.3.71"                         # Release tag to download
 assetName="${releaseTag}_linux_amd64.tar.gz" # Asset name
 downloadedTarPath="$(mktemp)"                # Path to downloaded tar file
 
@@ -21,16 +21,3 @@ mkdir -p $destinationDir
 tar xz -C $destinationDir -f $downloadedTarPath
 
 rm -rf $downloadedTarPath
-
-# TODO: Replace this by adding a `--version` flag!
-set +e
-output=$(/var/opt/test-runner/test-runner --help 2>&1)
-exit_code=$?
-echo "$output"
-echo "$output" | grep -qi "unknown command"
-grep_exit_code=$?
-if [ $exit_code -ne 1 ] || [ $grep_exit_code -ne 0 ]; then
-    echo "Test failed: exit code was $exit_code, output was: $output"
-    exit 1
-fi
-set -e

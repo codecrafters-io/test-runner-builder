@@ -1,0 +1,5 @@
+.vagrant/
+
+tests/fixtures/
+dist
+.env
