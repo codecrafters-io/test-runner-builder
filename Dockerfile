@@ -28,8 +28,12 @@ RUN depot --version
 COPY builder/ /tmp/builder/
 RUN cd /tmp/builder && go build -o /var/opt/test-runner-builder main.go
 
+# Ensure the Go program is installed and working
+RUN /var/opt/test-runner-builder --version
+
+# Download test runner to a directory (mounted during docker builds)
 COPY download_test_runner.sh /tmp/download_test_runner.sh
 RUN --mount=type=secret,id=test_runner_downloader_token,env=GITHUB_TOKEN /tmp/download_test_runner.sh
 
-# Ensure the Go program is installed and working
-RUN /var/opt/test-runner-builder --version
+# Ensure the test runner is installed and working
+RUN /var/opt/test-runner/test-runner --version
