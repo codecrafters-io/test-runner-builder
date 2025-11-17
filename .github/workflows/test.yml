@@ -37,7 +37,7 @@ jobs:
           ruby-version: 3.3.5
           bundler-cache: true
           cache-version: 5
-          working-directory: build
+          working-directory: builder
 
       - name: Run make refresh_test_fixtures
         run: make refresh_test_fixtures
