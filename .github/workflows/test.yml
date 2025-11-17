@@ -61,9 +61,4 @@ jobs:
           git config --global user.name "Your Name"
 
       - name: Run tests
-        run: make test
-        working-directory: builder
-        env:
-          DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
-          DEPOT_PROJECT: ${{ secrets.DEPOT_PROJECT }}
-          FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
+        run: cp .env.example .env && make test
