@@ -111,7 +111,7 @@ func BuildImageCommand() int {
 	flag.StringVar(&testRunnerDir, "test-runner-dir", "", "The directory of the test runner")
 	flag.StringVar(&testerDir, "tester-dir", "", "The directory of the tester")
 
-	flag.CommandLine.Parse(os.Args[2:]) // Use 2: to avoid the first command
+	flag.CommandLine.Parse(os.Args[1:]) // Use 1: to avoid the first command (the program name)
 
 	if codecraftersServerUrl == "" {
 		fmt.Println("codecrafters-server-url must be provided")
