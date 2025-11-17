@@ -27,7 +27,6 @@ class BuildImageCommandRunner
 
     command_parts = [
       TEST_RUNNER_EXECUTABLE_PATH,
-      "build_image",
       "--buildpack-slug='#{repository.buildpack.slug}'",
       "--buildpack-dockerfile-path='#{dockerfile_handle.path}'",
       "--build-id='#{build.id}'",
