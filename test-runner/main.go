@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/codecrafters-io/test-runner/internal/commands"
@@ -11,6 +12,12 @@ import (
 func main() {
 	utils.InitSentry()
 	defer utils.TeardownSentry()
+
+	// Used to check if the test runner is installed in the dockerfile
+	if len(os.Args) == 2 && os.Args[1] == "--version" {
+		fmt.Println("Test runner installed!")
+		os.Exit(0)
+	}
 
 	exitCode := 0
 
