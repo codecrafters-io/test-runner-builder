@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/codecrafters-io/test-runner/internal/globals"
+	"github.com/codecrafters-io/test-runner-builder/internal/globals"
 	"github.com/egym-playground/go-prefix-writer/prefixer"
 	cp "github.com/otiai10/copy"
 	"gvisor.dev/gvisor/pkg/linewriter"

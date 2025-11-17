@@ -1,4 +1,4 @@
-module github.com/codecrafters-io/test-runner
+module github.com/codecrafters-io/test-runner-builder
 
 go 1.23
 

@@ -25,8 +25,11 @@ ENV PATH="/root/.depot/bin:$PATH"
 # Ensure depot is installed and working
 RUN depot --version
 
-COPY test-runner/ /tmp/test-runner/
-RUN cd /tmp/test-runner && go build -o /var/opt/test-runner-builder main.go
+COPY builder/ /tmp/builder/
+RUN cd /tmp/builder && go build -o /var/opt/test-runner-builder main.go
+
+COPY download_test_runner.sh /tmp/download_test_runner.sh
+RUN --mount=type=secret,id=test_runner_downloader_token,env=GITHUB_TOKEN /tmp/download_test_runner.sh
 
 # Ensure the Go program is installed and working
 RUN /var/opt/test-runner-builder --version

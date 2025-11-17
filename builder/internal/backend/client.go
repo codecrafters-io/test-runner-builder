@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/codecrafters-io/test-runner/internal/globals"
+	"github.com/codecrafters-io/test-runner-builder/internal/globals"
 	"github.com/google/uuid"
 	"github.com/hashicorp/go-retryablehttp"
 )

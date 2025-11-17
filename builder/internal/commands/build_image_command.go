@@ -7,10 +7,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/codecrafters-io/test-runner/internal"
-	"github.com/codecrafters-io/test-runner/internal/backend"
-	"github.com/codecrafters-io/test-runner/internal/color"
-	"github.com/codecrafters-io/test-runner/internal/globals"
+	"github.com/codecrafters-io/test-runner-builder/internal"
+	"github.com/codecrafters-io/test-runner-builder/internal/backend"
+	"github.com/codecrafters-io/test-runner-builder/internal/color"
+	"github.com/codecrafters-io/test-runner-builder/internal/globals"
 )
 
 // If err is FriendlyError, it's a user error. Otherwise, it's an internal error.

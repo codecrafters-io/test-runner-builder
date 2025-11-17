@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/codecrafters-io/test-runner/internal/commands"
-	"github.com/codecrafters-io/test-runner/internal/utils"
+	"github.com/codecrafters-io/test-runner-builder/internal/commands"
+	"github.com/codecrafters-io/test-runner-builder/internal/utils"
 	"github.com/getsentry/sentry-go"
 )
 

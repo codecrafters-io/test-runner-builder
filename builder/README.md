@@ -30,5 +30,5 @@ To run a specific test:
 - Releases are automatically created on pushes to `main`
   - This happens via [./github/workflows/{tag,release}.yml](.github/workflows/tag.yml)
   - It takes 2-3 minutes for a release to be created after a push to `main`.
-  - You can confirm that a release has been created by checking the [Releases](https://github.com/codecrafters-io/test-runner/releases) page.
+  - You can confirm that a release has been created by checking the [Releases](https://github.com/codecrafters-io/test-runner-builder/releases) page.
 - Ask Paul to deploy the release (this part isn't automated yet)
