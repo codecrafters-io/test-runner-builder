@@ -37,11 +37,11 @@ jobs:
           ruby-version: 3.3.5
           bundler-cache: true
           cache-version: 5
-          working-directory: test-runner
+          working-directory: build
 
       - name: Run make refresh_test_fixtures
         run: make refresh_test_fixtures
-        working-directory: test-runner
+        working-directory: builder
 
       # Required for pulling git-api and git-daemon
       - name: Authenticate with ghcr.io
@@ -53,7 +53,7 @@ jobs:
 
       - name: Set up Docker
         run: docker compose up -d
-        working-directory: test-runner
+        working-directory: builder
 
       - name: Set up Git
         run: |
@@ -62,7 +62,7 @@ jobs:
 
       - name: Run tests
         run: make test
-        working-directory: test-runner
+        working-directory: builder
         env:
           DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
           DEPOT_PROJECT: ${{ secrets.DEPOT_PROJECT }}
