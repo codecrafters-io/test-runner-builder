@@ -1,4 +1,4 @@
-TEST_RUNNER_EXECUTABLE_PATH = File.expand_path("../../dist/main.out", __dir__)
+BUILDER_EXECUTABLE_PATH = File.expand_path("../../dist/main.out", __dir__)
 TEST_RUNNER_SOURCE_DIR = File.expand_path("../../", __dir__)
 TESTERS_DIR = File.expand_path("../fixtures/testers", __dir__)
 
@@ -18,15 +18,16 @@ class BuildImageCommandRunner
     FileUtils.rm_rf(tmp_dir)
     FileUtils.cp_r(git_repository.tmp_dir, tmp_dir)
 
+    # This isn't actually being used! We just need a binary present there to test.
     test_runner_dir = Dir.mktmpdir
-    `cp #{TEST_RUNNER_EXECUTABLE_PATH} #{test_runner_dir}/test-runner`
+    `cp #{BUILDER_EXECUTABLE_PATH} #{test_runner_dir}/test-runner`
 
     dockerfile_handle = Tempfile.new
     dockerfile_handle.write(repository.buildpack.processed_dockerfile_contents)
     dockerfile_handle.close
 
     command_parts = [
-      TEST_RUNNER_EXECUTABLE_PATH,
+      BUILDER_EXECUTABLE_PATH,
       "--buildpack-slug='#{repository.buildpack.slug}'",
       "--buildpack-dockerfile-path='#{dockerfile_handle.path}'",
       "--build-id='#{build.id}'",
