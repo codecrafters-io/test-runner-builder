@@ -1,0 +1,155 @@
+#14 [ 7/21] RUN cargo build --release --target-dir=/tmp/codecrafters-redis-target
+#14 0.600     Updating crates.io index
+#14 0.678  Downloading crates ...
+#14 0.714   Downloaded tokio-macros v1.8.2
+#14 0.717   Downloaded thiserror-impl v1.0.32
+#14 0.719   Downloaded lock_api v0.4.9
+#14 0.720   Downloaded socket2 v0.4.7
+#14 0.722   Downloaded smallvec v1.10.0
+#14 0.724   Downloaded signal-hook-registry v1.2.2
+#14 0.725   Downloaded pin-project-lite v0.2.9
+#14 0.729   Downloaded quote v1.0.7
+#14 0.731   Downloaded memchr v2.3.4
+#14 0.733   Downloaded unicode-xid v0.2.1
+#14 0.734   Downloaded mio v0.8.5
+#14 0.739   Downloaded bytes v1.3.0
+#14 0.742   Downloaded proc-macro2 v1.0.24
+#14 0.744   Downloaded num_cpus v1.13.0
+#14 0.746   Downloaded syn v1.0.67
+#14 0.755   Downloaded log v0.4.11
+#14 0.757   Downloaded tokio v1.23.0
+#14 0.786   Downloaded libc v0.2.138
+#14 0.809   Downloaded parking_lot v0.12.1
+#14 0.810   Downloaded cfg-if v1.0.0
+#14 0.811   Downloaded autocfg v1.1.0
+#14 0.812   Downloaded anyhow v1.0.59
+#14 0.815   Downloaded cfg-if v0.1.10
+#14 0.816   Downloaded thiserror v1.0.32
+#14 0.819   Downloaded parking_lot_core v0.9.5
+#14 0.821   Downloaded scopeguard v1.1.0
+#14 0.864    Compiling libc v0.2.138
+#14 0.864    Compiling proc-macro2 v1.0.24
+#14 0.864    Compiling unicode-xid v0.2.1
+#14 0.864    Compiling autocfg v1.1.0
+#14 0.864    Compiling syn v1.0.67
+#14 0.864    Compiling parking_lot_core v0.9.5
+#14 0.866    Compiling log v0.4.11
+#14 0.866    Compiling scopeguard v1.1.0
+#14 0.867    Compiling cfg-if v1.0.0
+#14 0.868    Compiling cfg-if v0.1.10
+#14 0.868    Compiling smallvec v1.10.0
+#14 0.869    Compiling memchr v2.3.4
+#14 0.870    Compiling anyhow v1.0.59
+#14 0.871    Compiling bytes v1.3.0
+#14 0.872    Compiling pin-project-lite v0.2.9
+#14 1.265    Compiling lock_api v0.4.9
+#14 1.265    Compiling tokio v1.23.0
+#14 1.744    Compiling quote v1.0.7
+#14 1.854    Compiling num_cpus v1.13.0
+#14 1.854    Compiling signal-hook-registry v1.2.2
+#14 1.854    Compiling socket2 v0.4.7
+#14 1.854    Compiling mio v0.8.5
+#14 2.015    Compiling parking_lot v0.12.1
+#14 3.769    Compiling tokio-macros v1.8.2
+#14 3.769    Compiling thiserror-impl v1.0.32
+#14 4.469    Compiling thiserror v1.0.32
+#14 8.128    Compiling redis-starter-rust v0.1.0 (/app)
+#14 8.272     Finished release [optimized] target(s) in 8.01s
+#14 DONE 8.3s
+
+#15 [ 8/21] RUN rm /tmp/codecrafters-redis-target/release/redis-starter-rust
+#15 DONE 0.2s
+
+#16 [ 9/21] RUN rm /tmp/codecrafters-redis-target/release/redis-starter-rust.d
+#16 DONE 0.1s
+
+#17 [10/21] RUN find /tmp/codecrafters-redis-target/release -type f -maxdepth 1 -delete
+#17 DONE 0.2s
+
+#18 [11/21] RUN rm -f /tmp/codecrafters-redis-target/release/deps/*redis_starter_rust*
+#18 DONE 0.2s
+
+#19 [12/21] RUN rm -f /tmp/codecrafters-redis-target/release/deps/redis_starter_rust*
+#19 DONE 0.3s
+
+#20 [13/21] RUN rm -f /tmp/codecrafters-redis-target/release/.fingerprint/*redis_starter_rust*
+#20 DONE 0.2s
+
+#21 [14/21] RUN rm -f /tmp/codecrafters-redis-target/release/.fingerprint/redis_starter_rust*
+#21 DONE 0.2s
+
+#22 [15/21] RUN rm -rf /app/src
+#22 DONE 0.2s
+
+#23 [16/21] RUN echo "cd ${CODECRAFTERS_SUBMISSION_DIR} && cargo build --release --target-dir=/tmp/codecrafters-redis-target --manifest-path Cargo.toml" > /codecrafters-precompile.sh
+#23 DONE 0.2s
+
+#24 [17/21] RUN chmod +x /codecrafters-precompile.sh
+#24 DONE 0.3s
+
+#25 [18/21] RUN apt-get update && apt-get install -y git curl
+#25 0.260 Get:1 http://deb.debian.org/debian buster InRelease [122 kB]
+#25 0.271 Get:2 http://deb.debian.org/debian-security buster/updates InRelease [34.8 kB]
+#25 0.274 Get:3 http://deb.debian.org/debian buster-updates InRelease [56.6 kB]
+#25 0.379 Get:4 http://deb.debian.org/debian buster/main amd64 Packages [7909 kB]
+#25 0.443 Get:5 http://deb.debian.org/debian-security buster/updates/main amd64 Packages [550 kB]
+#25 0.510 Get:6 http://deb.debian.org/debian buster-updates/main amd64 Packages [8788 B]
+#25 1.358 Fetched 8681 kB in 1s (7921 kB/s)
+#25 1.358 Reading package lists...
+#25 1.794 Reading package lists...
+#25 2.213 Building dependency tree...
+#25 2.280 Reading state information...
+#25 2.353 git is already the newest version (1:2.20.1-2+deb10u8).
+#25 2.353 The following additional packages will be installed:
+#25 2.353   libcurl4 libcurl4-openssl-dev
+#25 2.354 Suggested packages:
+#25 2.354   libcurl4-doc libidn11-dev libldap2-dev librtmp-dev libssh2-1-dev
+#25 2.365 The following packages will be upgraded:
+#25 2.365   curl libcurl4 libcurl4-openssl-dev
+#25 2.392 3 upgraded, 0 newly installed, 0 to remove and 42 not upgraded.
+#25 2.392 Need to get 1024 kB of archives.
+#25 2.392 After this operation, 1024 B disk space will be freed.
+#25 2.392 Get:1 http://deb.debian.org/debian-security buster/updates/main amd64 libcurl4-openssl-dev amd64 7.64.0-4+deb10u7 [423 kB]
+#25 2.399 Get:2 http://deb.debian.org/debian-security buster/updates/main amd64 curl amd64 7.64.0-4+deb10u7 [266 kB]
+#25 2.401 Get:3 http://deb.debian.org/debian-security buster/updates/main amd64 libcurl4 amd64 7.64.0-4+deb10u7 [335 kB]
+#25 2.580 debconf: delaying package configuration, since apt-utils is not installed
+#25 2.603 Fetched 1024 kB in 0s (32.7 MB/s)
+#25 2.635 (Reading database ...
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 23989 files and directories currently installed.)
+#25 2.805 Preparing to unpack .../libcurl4-openssl-dev_7.64.0-4+deb10u7_amd64.deb ...
+#25 2.821 Unpacking libcurl4-openssl-dev:amd64 (7.64.0-4+deb10u7) over (7.64.0-4+deb10u6) ...
+#25 2.964 Preparing to unpack .../curl_7.64.0-4+deb10u7_amd64.deb ...
+#25 2.977 Unpacking curl (7.64.0-4+deb10u7) over (7.64.0-4+deb10u6) ...
+#25 3.052 Preparing to unpack .../libcurl4_7.64.0-4+deb10u7_amd64.deb ...
+#25 3.072 Unpacking libcurl4:amd64 (7.64.0-4+deb10u7) over (7.64.0-4+deb10u6) ...
+#25 3.150 Setting up libcurl4:amd64 (7.64.0-4+deb10u7) ...
+#25 3.163 Setting up curl (7.64.0-4+deb10u7) ...
+#25 3.175 Setting up libcurl4-openssl-dev:amd64 (7.64.0-4+deb10u7) ...
+#25 3.188 Processing triggers for libc-bin (2.28-10+deb10u2) ...
+#25 DONE 3.5s
+
+#26 [19/21] WORKDIR /app
+#26 DONE 0.0s
+
+#27 [20/21] ADD . /app
+#27 DONE 0.1s

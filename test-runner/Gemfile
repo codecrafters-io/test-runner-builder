@@ -1,0 +1,48 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
+
+# Test Runner
+gem "minitest"
+
+# GitHub SDK
+gem "octokit"
+
+# Debugging
+gem "pry"
+
+# Parallel processing
+gem "pmap"
+
+# Formatter
+gem "standard"
+
+# Docker SDK
+gem "docker-api"
+
+# HTTParty
+gem "httparty"
+gem "faraday-retry"
+
+# Web Server
+gem "sinatra", require: false
+gem "puma"
+
+# Database
+gem "sqlite3"
+gem "activerecord"
+
+# Spawn processes
+gem "childprocess"
+gem "tty-command"
+
+# .env files
+gem "dotenv"
+
+# Autoloading
+gem "zeitwerk"
+
+# Ending minitest tests early
+gem "minitest-fail-fast"

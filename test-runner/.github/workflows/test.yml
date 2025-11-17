@@ -1,0 +1,65 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest-4-cores
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: depot/setup-action@v1
+
+      - name: Install logstream
+        run: |
+          curl -L https://github.com/codecrafters-io/logstream/releases/download/v0.2.2/v0.2.2_linux_amd64 -o /usr/local/bin/logstream
+          chmod +x /usr/local/bin/logstream
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.21"
+
+      - name: Set up ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.5
+          bundler-cache: true
+          cache-version: 5
+
+      - name: Run make refresh_test_fixtures
+        run: make refresh_test_fixtures
+
+      # Required for pulling git-api and git-daemon
+      - name: Authenticate with ghcr.io
+        run: echo '${{ secrets.CI_DOCKER_AUTH_PAT }}' | docker login ghcr.io -u codecrafters-bot --password-stdin
+
+      # Required by build_image
+      - name: Authenticate with registry.fly.io
+        run: echo '${{ secrets.FLY_ACCESS_TOKEN }}' | docker login registry.fly.io -u x --password-stdin
+
+      - name: Set up Docker
+        run: docker compose up -d
+
+      - name: Set up Git
+        run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+
+      - name: Run tests
+        run: make test
+        env:
+          DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
+          DEPOT_PROJECT: ${{ secrets.DEPOT_PROJECT }}
+          FLY_ACCESS_TOKEN: ${{ secrets.FLY_ACCESS_TOKEN }}
