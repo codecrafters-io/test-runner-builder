@@ -1,17 +1,11 @@
 # Test Runner
 
-This is the component responsible for running tests for CodeCrafters challenges.
+This is the Go code invoked from the [test-runner-builder](https://github.com/codecrafters-io/test-runner-builder) Docker image.
 
-### Functionality
+Responsibilities:
 
-It supports two commands:
-
-- `build_image`
-  - Builds the docker image that needs to executed to run tests for a challenge
-  - Also streams logs back to a logstream URL
-- `run_tests`
-  - Runs the tests for a challenge (this is the entrypoint of the docker image)
-  - Streams logs back to a logstream URL
+- Builds the docker image that needs to executed to run tests for a challenge
+- Also streams logs back to a logstream URL
 
 ### Testing Locally
 

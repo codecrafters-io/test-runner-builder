@@ -51,14 +51,11 @@ refresh_test_fixtures:
 	cp -R /tmp/byo-sqlite/solutions/python/01-dr6/code ./tests/fixtures/sqlite-python-pass-stage-1
 	cp /tmp/byo-sqlite/dockerfiles/python-3.13.Dockerfile ./tests/fixtures/dockerfiles/sqlite-python-3.13.Dockerfile
 
-test: test_go test_run_tests test_build_image
+test: test_go test_build_image
 
 test_go:
 	# -mod=mod is required to ensure that go isn't confused by Ruby's vendor/bundle directory
 	go test -mod=mod ./...
-
-test_run_tests: build
-	bundle exec ruby tests/run_tests_test.rb --verbose --fail-fast
 
 test_build_image: build
 	bundle exec ruby tests/build_image_test.rb --verbose --fail-fast
