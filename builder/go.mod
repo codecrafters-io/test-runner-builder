@@ -11,7 +11,7 @@ require (
 	github.com/getsentry/sentry-go v0.28.0
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
-	github.com/otiai10/copy v0.0.0-20240925044834-49b0b590f1e1
+	github.com/otiai10/copy v1.14.1
 	github.com/stretchr/testify v1.9.0
 	gopkg.in/yaml.v2 v2.4.0
 	gvisor.dev/gvisor v0.0.0-20231013233859-1a5aee553938
