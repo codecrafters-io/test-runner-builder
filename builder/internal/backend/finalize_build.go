@@ -19,7 +19,7 @@ func FinalizeBuild(buildId string, status string, logs []byte) error {
 		return fmt.Errorf("failed to marshal JSON: %w", err)
 	}
 
-	resp, err := PerformRequest("POST", "/services/test_runner/finalize_test_runner_build", bodyJson)
+	resp, err := PerformRequest("POST", "/services/test_runner_builder/finalize_test_runner_build", bodyJson)
 	if err != nil {
 		return fmt.Errorf("HTTP request failed: %w", err)
 	}
