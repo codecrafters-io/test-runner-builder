@@ -138,13 +138,70 @@ class BuildImageTest < Minitest::Test
     create_build!
     run_script!
     stream_output = Timeout.timeout(5) { `logstream -url #{@build.local_logstream_url} follow` }
-    
+
     assert_match(/Build successful/, stream_output)
     assert_equal "success", @build.reload.status
-    
+
     ls_output = `docker run --rm registry.fly.io/test-depot-push:test-runner-tests ls -la /app`
     refute_match(/.dockerignore/, ls_output, ".dockerignore should not exist in the built image")
     assert_match(/control.txt/, ls_output, "control.txt should still exist in the built image")
+  end
+
+  def test_handles_missing_test_sh
+    create_and_push_git_repository!("redis-ruby")
+
+    # Create a tester directory without test.sh
+    tester_dir = Dir.mktmpdir
+    # Create a dummy tester binary (validation only checks for test.sh)
+    File.write(File.join(tester_dir, "tester"), "#!/bin/sh\necho 'dummy tester'\n")
+    File.chmod(0o755, File.join(tester_dir, "tester"))
+
+    create_build!
+
+    begin
+      run_script!(tester_dir: tester_dir)
+      flunk "Expected build to fail with missing test.sh"
+    rescue
+      # Expected to fail
+    end
+
+    assert_equal "error", @build.reload.status
+
+    output = Timeout.timeout(5) { `logstream -url #{@build.local_logstream_url} follow` }
+    assert_match(/CodeCrafters internal error/i, output)
+    assert_match(/test\.sh does not exist in tester dir/, output)
+    assert_match(/CodeCrafters internal error/i, @build.reload.parsed_logs)
+    assert_match(/test\.sh does not exist in tester dir/, @build.reload.parsed_logs)
+  end
+
+  def test_handles_non_executable_test_sh
+    create_and_push_git_repository!("redis-ruby")
+
+    # Create a tester directory with non-executable test.sh
+    tester_dir = Dir.mktmpdir
+    # Create a dummy tester binary (validation only checks for test.sh)
+    File.write(File.join(tester_dir, "tester"), "#!/bin/sh\necho 'dummy tester'\n")
+    File.chmod(0o755, File.join(tester_dir, "tester"))
+    test_sh_path = File.join(tester_dir, "test.sh")
+    File.write(test_sh_path, "#!/bin/sh\nexec \"${TESTER_DIR}/tester\"\n")
+    File.chmod(0o644, test_sh_path) # Not executable
+
+    create_build!
+
+    begin
+      run_script!(tester_dir: tester_dir)
+      flunk "Expected build to fail with non-executable test.sh"
+    rescue
+      # Expected to fail
+    end
+
+    assert_equal "error", @build.reload.status
+
+    output = Timeout.timeout(5) { `logstream -url #{@build.local_logstream_url} follow` }
+    assert_match(/CodeCrafters internal error/i, output)
+    assert_match(/test\.sh is not executable in tester dir/, output)
+    assert_match(/CodeCrafters internal error/i, @build.reload.parsed_logs)
+    assert_match(/test\.sh is not executable in tester dir/, @build.reload.parsed_logs)
   end
 
   def create_build!(commit_sha: nil)
@@ -160,9 +217,9 @@ class BuildImageTest < Minitest::Test
     @git_repository.push_to_git_daemon!
   end
 
-  def run_script!(test_run: nil)
+  def run_script!(test_run: nil, tester_dir: nil)
     BuildImageCommandRunner
       .new(git_repository: @git_repository, repository: @repository)
-      .run(build: @build, test_run: test_run)
+      .run(build: @build, test_run: test_run, tester_dir: tester_dir)
   end
 end

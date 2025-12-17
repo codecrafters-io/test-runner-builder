@@ -29,7 +29,7 @@ refresh_test_fixtures:
 
 	rm -rf /tmp/byo-redis
 	git clone https://github.com/codecrafters-io/build-your-own-redis /tmp/byo-redis
-	cd /tmp/byo-redis && git checkout 5ce64229f59108851de28c4f083f3459d58eff34
+	cd /tmp/byo-redis && git checkout 5fccb61555a659223eff1d3b96c437ce82704d48
 
 	rm -rf /tmp/byo-sqlite
 	git clone https://github.com/codecrafters-io/build-your-own-sqlite /tmp/byo-sqlite
@@ -37,15 +37,15 @@ refresh_test_fixtures:
 
 	rm -rf ./tests/fixtures/redis-ruby-pass-stage-1
 	cp -R /tmp/byo-redis/solutions/ruby/01-jm1/code ./tests/fixtures/redis-ruby-pass-stage-1
-	cp /tmp/byo-redis/dockerfiles/ruby-3.3.Dockerfile ./tests/fixtures/dockerfiles/redis-ruby-3.3.Dockerfile
+	cp /tmp/byo-redis/dockerfiles/ruby-3.4.Dockerfile ./tests/fixtures/dockerfiles/redis-ruby-3.4.Dockerfile
 
 	rm -rf ./tests/fixtures/redis-rust-pass-stage-1
 	cp -R /tmp/byo-redis/solutions/rust/01-jm1/code ./tests/fixtures/redis-rust-pass-stage-1
-	cp /tmp/byo-redis/dockerfiles/rust-1.88.Dockerfile ./tests/fixtures/dockerfiles/redis-rust-1.88.Dockerfile
+	cp /tmp/byo-redis/dockerfiles/rust-1.91.Dockerfile ./tests/fixtures/dockerfiles/redis-rust-1.91.Dockerfile
 
 	rm -rf ./tests/fixtures/redis-go-pass-stage-1
 	cp -R /tmp/byo-redis/solutions/go/01-jm1/code ./tests/fixtures/redis-go-pass-stage-1
-	cp /tmp/byo-redis/dockerfiles/go-1.24.Dockerfile ./tests/fixtures/dockerfiles/redis-go-1.24.Dockerfile
+	cp /tmp/byo-redis/dockerfiles/go-1.25.Dockerfile ./tests/fixtures/dockerfiles/redis-go-1.25.Dockerfile
 
 	rm -rf ./tests/fixtures/sqlite-python-pass-stage-1
 	cp -R /tmp/byo-sqlite/solutions/python/01-dr6/code ./tests/fixtures/sqlite-python-pass-stage-1
