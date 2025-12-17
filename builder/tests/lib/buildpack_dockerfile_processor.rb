@@ -41,12 +41,12 @@ class BuildpackDockerfileProcessor
       case from_line
       when /alpine/
         "RUN apk add --update-cache --upgrade git curl"
-      when /buster/, /slim/, /focal/, /bullseye/, /bookworm/
+      when /debian/, /buster/, /slim/, /focal/, /noble/, /bullseye/, /bookworm/, /trixie/
         "RUN apt-get update && apt-get install -y git curl"
       when /dart/
         "RUN apt-get update && apt-get install -y git curl" # Dart doesn't have OS type in its FROM line
       else
-        raise "Unknown from_line: #{from_line}"
+        raise "Expected FROM line (#{from_line}) to contain a distribution identifier like alpine, debian, buster, etc."
       end,
 
       "CMD [\"/var/opt/test-runner\", \"run_tests\"]",
