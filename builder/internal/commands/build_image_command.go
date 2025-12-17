@@ -168,6 +168,18 @@ func BuildImageCommand() int {
 		return handleErrorDuringBuild(build, "", fmt.Errorf("tester dir (%s) does not exist", testerDir))
 	}
 
+	testShPath := filepath.Join(testerDir, "test.sh")
+	fileInfo, err := os.Stat(testShPath)
+	if os.IsNotExist(err) {
+		return handleErrorDuringBuild(build, "", fmt.Errorf("test.sh does not exist in tester dir (%s)", testerDir))
+	}
+	if err != nil {
+		return handleErrorDuringBuild(build, "", fmt.Errorf("failed to stat test.sh in tester dir (%s): %w", testerDir, err))
+	}
+	if fileInfo.Mode()&0111 == 0 {
+		return handleErrorDuringBuild(build, "", fmt.Errorf("test.sh is not executable in tester dir (%s)", testerDir))
+	}
+
 	if _, err := os.Stat(testRunnerDir); os.IsNotExist(err) {
 		return handleErrorDuringBuild(build, "", fmt.Errorf("test runner dir (%s) does not exist", testRunnerDir))
 	}
