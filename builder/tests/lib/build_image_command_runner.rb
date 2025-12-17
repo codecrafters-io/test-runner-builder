@@ -11,9 +11,9 @@ class BuildImageCommandRunner
     self.repository = repository
   end
 
-  def run(build:, test_run: nil)
+  def run(build:, test_run: nil, tester_dir: nil)
     tmp_dir = Dir.mktmpdir
-    tester_dir = TesterDownloader.new(course: OpenStruct.new(slug: repository.course_slug), testers_root_dir: TESTERS_DIR).download_if_needed
+    tester_dir ||= TesterDownloader.new(course: OpenStruct.new(slug: repository.course_slug), testers_root_dir: TESTERS_DIR).download_if_needed
 
     FileUtils.rm_rf(tmp_dir)
     FileUtils.cp_r(git_repository.tmp_dir, tmp_dir)
